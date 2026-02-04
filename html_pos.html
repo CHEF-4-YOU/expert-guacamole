@@ -1,0 +1,567 @@
+html_pos
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Villa Verano PRO v2.0</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <style>
+        body {
+            font-family: system-ui, -apple-system, sans-serif;
+            background-color: #0f172a;
+        }
+
+        /* Botones Soft Restaurant Style */
+        .btn-soft {
+            box-shadow: 0 4px 0 rgba(0, 0, 0, 0.3);
+            transition: all 0.1s;
+        }
+
+        .btn-soft:active {
+            box-shadow: 0 0 0 rgba(0, 0, 0, 0.3);
+            transform: translateY(4px);
+        }
+
+        /* Scrollbars Estilizados */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #1e293b;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #475569;
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #64748b;
+        }
+
+        /* Animaciones */
+        .fade-in {
+            animation: fadeIn 0.3s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        /* Grid responsivo mejorado */
+        .menu-grid-cols {
+            grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+        }
+    </style>
+</head>
+
+<body class="text-white h-screen overflow-hidden flex flex-col">
+
+    <header class="bg-slate-900 px-4 py-2 flex justify-between items-center border-b border-slate-700 shadow-lg z-30">
+        <div class="flex items-center gap-4">
+            <div class="bg-blue-600 px-3 py-1 rounded font-bold tracking-wider shadow-lg shadow-blue-500/20">
+                VILLA VERANO <span class="text-blue-200 text-xs">PRO</span>
+            </div>
+            <div class="text-sm text-gray-400 hidden md:block">
+                Chef: <span class="text-white font-bold">Franko</span>
+            </div>
+        </div>
+        <div class="flex items-center gap-4">
+            <button onclick="toggleAdminMode()" id="btn-admin"
+                class="text-xs bg-slate-800 px-3 py-1.5 rounded border border-slate-600 hover:bg-slate-700 transition flex items-center gap-2">
+                <ion-icon name="eye-outline"></ion-icon>
+                <span>Ver Costos</span>
+            </button>
+            <div id="clock" class="font-mono text-xl font-bold text-blue-400 min-w-[60px] text-right">00:00</div>
+        </div>
+    </header>
+
+    <div class="flex-1 flex overflow-hidden relative">
+
+        <div id="view-tables" class="absolute inset-0 bg-slate-800 z-20 flex flex-col fade-in">
+            <div class="p-6 text-center">
+                <h2 class="text-2xl font-bold text-slate-200 mb-6 tracking-widest">SELECCIONAR ÁREA</h2>
+                <div class="flex justify-center gap-2 mb-8">
+                    <button
+                        class="px-8 py-3 bg-blue-600 rounded-t-lg font-bold shadow-lg border-b-2 border-blue-400">TERRAZA</button>
+                    <button
+                        class="px-8 py-3 bg-slate-700 rounded-t-lg text-gray-400 hover:bg-slate-600 hover:text-white transition">COMEDOR</button>
+                    <button
+                        class="px-8 py-3 bg-slate-700 rounded-t-lg text-gray-400 hover:bg-slate-600 hover:text-white transition">ALBERCA</button>
+                </div>
+            </div>
+
+            <div class="flex-1 px-6 overflow-y-auto">
+                <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-6 max-w-6xl mx-auto pb-10">
+                    <script>
+                        for (let i = 1; i <= 5; i++) {
+                            document.write(`
+                            <button onclick="openTable(${i})" class="btn-soft bg-emerald-600 h-40 rounded-xl flex flex-col items-center justify-center hover:bg-emerald-500 group relative border-2 border-emerald-700">
+                                <ion-icon name="restaurant" class="text-5xl mb-3 text-emerald-100 group-hover:scale-110 transition"></ion-icon>
+                                <span class="font-bold text-2xl">MESA ${i}</span>
+                                <span class="text-xs mt-2 bg-emerald-800 px-2 py-1 rounded text-emerald-200">Disponible</span>
+                            </button>`);
+                        }
+                        // Una mesa ocupada de ejemplo
+                        document.write(`
+                            <button onclick="openTable(6)" class="btn-soft bg-rose-600 h-40 rounded-xl flex flex-col items-center justify-center hover:bg-rose-500 group relative border-2 border-rose-800">
+                                <div class="absolute top-3 right-3 bg-white text-rose-700 text-xs px-2 py-0.5 rounded font-bold shadow">OCUPADA</div>
+                                <ion-icon name="people" class="text-5xl mb-3 text-rose-100 group-hover:scale-110 transition"></ion-icon>
+                                <span class="font-bold text-2xl">MESA 6</span>
+                                <span class="text-sm mt-2 font-mono bg-rose-800 px-2 py-1 rounded text-white">$1,850.00</span>
+                            </button>`);
+                    </script>
+                </div>
+            </div>
+        </div>
+
+        <div id="view-pos" class="flex w-full h-full hidden">
+
+            <div class="w-full md:w-3/4 flex flex-col border-r border-slate-700 bg-slate-800">
+
+                <div class="bg-slate-900 p-2 shadow-md">
+                    <div class="flex gap-2 overflow-x-auto pb-2" id="category-bar">
+                    </div>
+                </div>
+
+                <div class="flex-1 p-4 overflow-y-auto grid menu-grid-cols gap-3 content-start bg-slate-800"
+                    id="menu-grid">
+                </div>
+
+                <div class="h-16 bg-slate-900 flex items-center justify-between px-6 border-t border-slate-700 z-10">
+                    <button onclick="showTables()"
+                        class="bg-orange-600 hover:bg-orange-500 text-white px-6 py-2 rounded-lg font-bold flex items-center gap-2 transition shadow-lg">
+                        <ion-icon name="arrow-back" class="text-xl"></ion-icon>
+                        <span>MESAS</span>
+                    </button>
+                    <div class="text-right">
+                        <p class="text-gray-400 text-xs uppercase">Comandando en</p>
+                        <p class="text-white font-bold text-xl flex items-center gap-2">
+                            <ion-icon name="restaurant-outline"></ion-icon>
+                            <span id="current-table-label">MESA #1</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="hidden md:flex md:w-1/4 bg-slate-100 text-slate-900 flex-col shadow-2xl relative z-20">
+                <div class="bg-gradient-to-r from-blue-800 to-blue-600 text-white p-4 shadow-md">
+                    <div class="flex justify-between items-center mb-1">
+                        <span class="font-bold text-lg">Cuenta</span>
+                        <span class="bg-white/20 px-2 py-0.5 rounded text-sm" id="ticket-table-num">Mesa 1</span>
+                    </div>
+                    <div class="text-blue-200 text-xs flex justify-between">
+                        <span>Folio: <span id="folio-num">A-1024</span></span>
+                        <span id="ticket-date">12/12/2025</span>
+                    </div>
+                </div>
+
+                <div id="cart-items" class="flex-1 overflow-y-auto p-3 space-y-2 bg-slate-50">
+                </div>
+
+                <div class="bg-white border-t border-slate-300 p-4 shadow-[0_-5px_15px_rgba(0,0,0,0.1)]">
+                    <div class="space-y-1 mb-4 text-slate-600">
+                        <div class="flex justify-between text-sm">
+                            <span>Subtotal:</span>
+                            <span id="lbl-subtotal" class="font-medium">$0.00</span>
+                        </div>
+                        <div class="flex justify-between text-sm">
+                            <span>IVA (16%):</span>
+                            <span id="lbl-tax" class="font-medium">$0.00</span>
+                        </div>
+                        <div
+                            class="flex justify-between text-2xl font-extrabold text-blue-900 mt-2 border-t pt-2 border-dashed border-slate-300">
+                            <span>TOTAL:</span>
+                            <span id="lbl-total">$0.00</span>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-3">
+                        <button onclick="printCommand()"
+                            class="bg-slate-700 text-white py-3 rounded-lg font-bold hover:bg-slate-600 transition flex items-center justify-center gap-2 shadow">
+                            <ion-icon name="print-outline"></ion-icon> COCINA
+                        </button>
+                        <button onclick="payOrder()"
+                            class="bg-green-600 text-white py-3 rounded-lg font-bold hover:bg-green-500 transition flex items-center justify-center gap-2 shadow-lg shadow-green-500/30">
+                            <ion-icon name="cash-outline"></ion-icon> PAGAR
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal-mods"
+        class="fixed inset-0 bg-black/90 hidden z-50 flex items-center justify-center backdrop-blur-sm fade-in">
+        <div
+            class="bg-slate-800 rounded-xl w-[500px] max-w-full mx-4 border border-slate-600 shadow-2xl overflow-hidden">
+            <div class="bg-slate-900 p-4 border-b border-slate-700">
+                <h3 class="text-xl font-bold text-center text-white" id="mod-title">Opciones</h3>
+            </div>
+
+            <div class="p-6">
+                <div class="grid grid-cols-2 gap-3 mb-6" id="mod-options">
+                </div>
+
+                <div class="grid grid-cols-2 gap-3">
+                    <button onclick="closeMods()"
+                        class="bg-slate-600 py-3 rounded-lg font-bold hover:bg-slate-500 text-slate-200">
+                        Cancelar
+                    </button>
+                    <button id="btn-mod-normal"
+                        class="bg-green-600 py-3 rounded-lg font-bold hover:bg-green-500 text-white shadow-lg">
+                        SIN CAMBIOS
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // --- BASE DE DATOS AMPLIADA (Villa Verano) ---
+        // Costos estimados para función "Admin Mode" (aprox 25-30% del precio)
+        const menuDB = [
+            // --- BEBIDAS: CERVEZAS ---
+            { id: 101, name: "Corona", price: 60, cost: 18, category: "Cervezas", mods: ["Con Vaso", "Con Sal y Limón", "Sola"] },
+            { id: 102, name: "Pacífico", price: 60, cost: 18, category: "Cervezas", mods: ["Con Vaso", "Con Sal y Limón", "Sola"] },
+            { id: 103, name: "Modelo Especial", price: 65, cost: 20, category: "Cervezas", mods: ["Con Vaso", "Sola"] },
+            { id: 104, name: "Negra Modelo", price: 65, cost: 20, category: "Cervezas", mods: ["Con Vaso", "Sola"] },
+            { id: 105, name: "Michelob Ultra", price: 70, cost: 22, category: "Cervezas", mods: ["Con Vaso", "Sola"] },
+
+            // --- BEBIDAS: COCTELES ---
+            { id: 201, name: "Margarita Clásica", price: 180, cost: 45, category: "Cocteles", mods: ["Frappé", "En las Rocas", "Sin Sal"] },
+            { id: 202, name: "Margarita Cadillac", price: 240, cost: 70, category: "Cocteles", mods: ["Frappé", "En las Rocas"] },
+            { id: 203, name: "Paloma", price: 180, cost: 40, category: "Cocteles", mods: ["Sal Escarchada", "Sin Sal"] },
+            { id: 204, name: "Mojito", price: 190, cost: 45, category: "Cocteles", mods: ["Poca Azúcar", "Normal"] },
+            { id: 205, name: "Carajillo", price: 220, cost: 60, category: "Cocteles", mods: ["Shaker", "Directo", "Divorciado"] },
+            { id: 206, name: "Piña Colada", price: 180, cost: 50, category: "Cocteles", mods: ["Con Alcohol", "Vigen"] },
+            { id: 207, name: "Aperol Spritz", price: 250, cost: 80, category: "Cocteles", mods: [] },
+
+            // --- BEBIDAS: SIN ALCOHOL ---
+            { id: 301, name: "Coca Cola", price: 45, cost: 12, category: "Refrescos", mods: ["Con Hielo", "Sin Hielo"] },
+            { id: 302, name: "Coca Light", price: 45, cost: 12, category: "Refrescos", mods: ["Con Hielo", "Sin Hielo"] },
+            { id: 303, name: "Sprite", price: 45, cost: 12, category: "Refrescos", mods: ["Con Hielo", "Sin Hielo"] },
+            { id: 304, name: "Limonada/Naranjada", price: 60, cost: 10, category: "Refrescos", mods: ["Mineral", "Natural", "Poca Azúcar"] },
+            { id: 305, name: "Agua Embotellada", price: 40, cost: 8, category: "Refrescos", mods: ["Al Tiempo", "Fría"] },
+            { id: 306, name: "Agua Perrier", price: 85, cost: 35, category: "Refrescos", mods: ["Con Limón", "Sola"] },
+
+            // --- ALIMENTOS: ENTRADAS ---
+            { id: 401, name: "Guacamole Villa", price: 190, cost: 50, category: "Entradas", mods: ["Con Totopos", "Con Verduras", "Picante"] },
+            { id: 402, name: "Ceviche Vallarta", price: 240, cost: 75, category: "Entradas", mods: ["Sin Cilantro", "Extra Tostadas"] },
+            { id: 403, name: "Aguachile Verde", price: 260, cost: 85, category: "Entradas", mods: ["Poco Picante", "Muy Picante"] },
+            { id: 404, name: "Nachos con Arrachera", price: 280, cost: 90, category: "Entradas", mods: ["Sin Jalapeños", "Queso Aparte"] },
+            { id: 405, name: "Queso Fundido", price: 180, cost: 55, category: "Entradas", mods: ["Con Chorizo", "Con Champiñones", "Natural"] },
+
+            // --- ALIMENTOS: PLATOS FUERTES ---
+            { id: 501, name: "Tacos Baja (3)", price: 220, cost: 65, category: "Fuertes", mods: ["Camarón", "Pescado", "Mixtos"] },
+            { id: 502, name: "Tacos Arrachera (3)", price: 240, cost: 75, category: "Fuertes", mods: ["Con Todo", "Sin Cebolla"] },
+            { id: 503, name: "Hamburguesa Villa", price: 280, cost: 90, category: "Fuertes", mods: ["Término Medio", "3/4", "Bien Cocida", "Sin Queso"] },
+            { id: 504, name: "Pescado Zarandeado", price: 350, cost: 110, category: "Fuertes", mods: ["Ajo", "Diabla", "Zarandeado"] },
+            { id: 505, name: "Filete Mignon", price: 480, cost: 160, category: "Fuertes", mods: ["Término Medio", "3/4", "Rojo", "Bien Cocido"] },
+            { id: 506, name: "Fajitas de Pollo", price: 260, cost: 70, category: "Fuertes", mods: [] },
+            { id: 507, name: "Camarones al Coco", price: 320, cost: 95, category: "Fuertes", mods: ["Salsa Mango", "Salsa Tamarindo"] },
+
+            // --- ALIMENTOS: DESAYUNOS (Del PDF anterior) ---
+            { id: 601, name: "Huevos Rancheros", price: 180, cost: 40, category: "Desayuno", mods: ["Tiernos", "Cocidos", "Divorciados"] },
+            { id: 602, name: "Chilaquiles", price: 190, cost: 45, category: "Desayuno", mods: ["Verdes", "Rojos", "Con Pollo", "Con Huevo"] },
+            { id: 603, name: "Pan Francés", price: 160, cost: 35, category: "Desayuno", mods: ["Tocino Extra", "Fruta Extra"] },
+            { id: 604, name: "Omelette", price: 190, cost: 45, category: "Desayuno", mods: ["Solo Claras", "Con Todo", "Vegetariano"] },
+
+            // --- POSTRES ---
+            { id: 701, name: "Flan de la Casa", price: 120, cost: 30, category: "Postres", mods: [] },
+            { id: 702, name: "Pastel de Chocolate", price: 140, cost: 40, category: "Postres", mods: ["Con Helado"] },
+            { id: 703, name: "Helado Artesanal", price: 90, cost: 25, category: "Postres", mods: ["Vainilla", "Chocolate", "Fresa"] }
+        ];
+
+        // --- VARIABLES DE ESTADO ---
+        let currentTable = 1;
+        let cart = {}; // { tableId: [items...] }
+        let adminMode = false;
+
+        // --- INICIALIZACIÓN ---
+        function init() {
+            updateClock();
+            setInterval(updateClock, 60000);
+            renderCategories("Cervezas"); // Empezar mostrando cervezas
+        }
+
+        // --- NAVEGACIÓN Y MESAS ---
+        function openTable(tableId) {
+            currentTable = tableId;
+            document.getElementById('view-tables').classList.add('hidden');
+            document.getElementById('view-pos').classList.remove('hidden');
+
+            // Actualizar etiquetas
+            document.getElementById('current-table-label').innerText = `MESA #${tableId}`;
+            document.getElementById('ticket-table-num').innerText = `Mesa ${tableId}`;
+
+            // Fecha actual
+            const d = new Date();
+            document.getElementById('ticket-date').innerText = d.toLocaleDateString();
+
+            renderCart();
+        }
+
+        function showTables() {
+            document.getElementById('view-pos').classList.add('hidden');
+            document.getElementById('view-tables').classList.remove('hidden');
+        }
+
+        function updateClock() {
+            const now = new Date();
+            document.getElementById('clock').innerText = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+        }
+
+        // --- LÓGICA DE MENÚ Y RENDERIZADO ---
+        function renderCategories(activeCat) {
+            // Obtener categorías únicas
+            const cats = [...new Set(menuDB.map(i => i.category))];
+            const bar = document.getElementById('category-bar');
+
+            bar.innerHTML = cats.map(c => {
+                // Iconos por categoría (opcional)
+                let icon = 'restaurant';
+                if (c.includes('Cervezas')) icon = 'beer';
+                if (c.includes('Cocteles')) icon = 'wine';
+                if (c.includes('Refrescos')) icon = 'water';
+                if (c.includes('Postres')) icon = 'ice-cream';
+
+                return `
+                <button onclick="renderMenu('${c}')" 
+                class="px-5 py-3 rounded-lg font-bold whitespace-nowrap transition flex items-center gap-2 border border-transparent
+                ${c === activeCat
+                        ? 'bg-blue-600 text-white shadow-lg shadow-blue-500/40 border-blue-400'
+                        : 'bg-slate-700 text-slate-300 hover:bg-slate-600 hover:text-white'}">
+                    <ion-icon name="${icon}"></ion-icon>
+                    ${c.toUpperCase()}
+                </button>
+            `}).join('');
+
+            renderMenu(activeCat);
+        }
+
+        function renderMenu(cat) {
+            const grid = document.getElementById('menu-grid');
+            grid.innerHTML = ''; // Limpiar grid
+
+            const items = menuDB.filter(i => i.category === cat);
+
+            // Actualizar botón activo visualmente en la barra
+            document.querySelectorAll('#category-bar button').forEach(b => {
+                if (b.textContent.includes(cat.toUpperCase())) {
+                    b.classList.add('bg-blue-600', 'text-white');
+                    b.classList.remove('bg-slate-700', 'text-slate-300');
+                } else {
+                    b.classList.remove('bg-blue-600', 'text-white');
+                    b.classList.add('bg-slate-700', 'text-slate-300');
+                }
+            });
+
+            items.forEach(item => {
+                // Cálculo de Margen (Admin Mode)
+                let costHtml = '';
+                if (adminMode) {
+                    const margin = ((item.price - item.cost) / item.price * 100).toFixed(0);
+                    const marginClass = margin < 30 ? 'text-red-400' : 'text-green-400';
+                    costHtml = `
+                        <div class="mt-2 pt-2 border-t border-slate-600 text-xs flex justify-between items-center font-mono">
+                            <span class="text-slate-400">Costo: $${item.cost}</span>
+                            <span class="${marginClass} font-bold">${margin}% Mg</span>
+                        </div>
+                    `;
+                }
+
+                const btn = document.createElement('button');
+                btn.className = "btn-soft bg-slate-700 hover:bg-slate-600 p-4 rounded-xl text-left flex flex-col justify-between min-h-[110px] relative group border border-slate-600 hover:border-blue-500 transition-colors";
+                btn.onclick = () => checkModifiers(item);
+
+                btn.innerHTML = `
+                    <div>
+                        <span class="font-bold text-sm leading-tight block text-slate-100 mb-1">${item.name}</span>
+                        <span class="text-lg font-bold text-blue-400">$${item.price.toFixed(2)}</span>
+                    </div>
+                    ${costHtml}
+                    <div class="absolute bottom-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                        <ion-icon name="add-circle" class="text-3xl text-blue-500"></ion-icon>
+                    </div>
+                `;
+                grid.appendChild(btn);
+            });
+        }
+
+        function toggleAdminMode() {
+            adminMode = !adminMode;
+            const btn = document.getElementById('btn-admin');
+            if (adminMode) {
+                btn.classList.add('bg-blue-600', 'text-white', 'border-blue-400');
+                btn.classList.remove('bg-slate-800');
+            } else {
+                btn.classList.remove('bg-blue-600', 'text-white', 'border-blue-400');
+                btn.classList.add('bg-slate-800');
+            }
+
+            // Re-renderizar la categoría actual para ver cambios
+            const activeBtn = document.querySelector('#category-bar .bg-blue-600');
+            if (activeBtn) {
+                // Extraer nombre de categoría (limpiar iconos y espacios)
+                const catName = activeBtn.innerText.trim();
+                // Buscar la categoría original en la DB que coincida (ignorando mayúsculas)
+                const originalCat = menuDB.find(i => i.category.toUpperCase() === catName).category;
+                renderMenu(originalCat);
+            }
+        }
+
+        // --- MODIFICADORES (Soft Restaurant Logic) ---
+        function checkModifiers(item) {
+            if (item.mods && item.mods.length > 0) {
+                showModsModal(item);
+            } else {
+                addItemToCart(item, "");
+            }
+        }
+
+        function showModsModal(item) {
+            const modal = document.getElementById('modal-mods');
+            const container = document.getElementById('mod-options');
+            const title = document.getElementById('mod-title');
+            const btnNormal = document.getElementById('btn-mod-normal');
+
+            title.innerText = `${item.name}`;
+            container.innerHTML = '';
+
+            item.mods.forEach(mod => {
+                const btn = document.createElement('button');
+                btn.className = "bg-slate-700 hover:bg-blue-600 hover:text-white py-4 rounded-lg font-bold text-slate-300 transition border border-slate-600";
+                btn.innerText = mod;
+                btn.onclick = () => {
+                    addItemToCart(item, mod);
+                    closeMods();
+                };
+                container.appendChild(btn);
+            });
+
+            // Configurar botón "Normal"
+            btnNormal.onclick = () => {
+                addItemToCart(item, "");
+                closeMods();
+            };
+
+            modal.classList.remove('hidden');
+        }
+
+        function closeMods() {
+            document.getElementById('modal-mods').classList.add('hidden');
+        }
+
+        // --- CARRITO Y CÁLCULOS ---
+        function addItemToCart(item, note) {
+            if (!cart[currentTable]) cart[currentTable] = [];
+
+            cart[currentTable].push({
+                ...item,
+                note: note,
+                uid: Date.now() + Math.random() // ID único para borrar
+            });
+            renderCart();
+        }
+
+        function renderCart() {
+            const container = document.getElementById('cart-items');
+            container.innerHTML = '';
+
+            const items = cart[currentTable] || [];
+
+            if (items.length === 0) {
+                container.innerHTML = `
+                    <div class="text-center mt-10 opacity-50">
+                        <ion-icon name="cart-outline" class="text-4xl text-slate-400"></ion-icon>
+                        <p class="text-sm text-slate-500">Mesa vacía</p>
+                    </div>`;
+            }
+
+            items.forEach((item, index) => {
+                const noteHtml = item.note
+                    ? `<div class="text-xs text-blue-600 font-semibold italic flex items-center gap-1"><ion-icon name="create-outline"></ion-icon> ${item.note}</div>`
+                    : '';
+
+                const row = document.createElement('div');
+                row.className = "flex justify-between items-start border-b border-slate-200 pb-2 bg-white p-2 rounded shadow-sm";
+                row.innerHTML = `
+                    <div class="flex-1 pr-2">
+                        <div class="font-bold text-slate-800 text-sm">${item.name}</div>
+                        ${noteHtml}
+                    </div>
+                    <div class="text-right flex flex-col items-end">
+                        <div class="font-bold text-slate-900">$${item.price.toFixed(2)}</div>
+                        <button onclick="removeItem(${index})" class="text-red-500 text-xs hover:bg-red-50 px-2 py-1 rounded transition mt-1">
+                            <ion-icon name="trash"></ion-icon>
+                        </button>
+                    </div>
+                `;
+                container.appendChild(row);
+            });
+
+            updateTotals(items);
+        }
+
+        function removeItem(index) {
+            cart[currentTable].splice(index, 1);
+            renderCart();
+        }
+
+        function updateTotals(items) {
+            const total = items.reduce((acc, i) => acc + i.price, 0);
+            // Cálculo inverso de IVA (si los precios ya incluyen IVA) o agregado.
+            // Aquí asumimos Precios + IVA
+            const subtotal = total / 1.16;
+            const tax = total - subtotal;
+
+            document.getElementById('lbl-subtotal').innerText = `$${subtotal.toFixed(2)}`;
+            document.getElementById('lbl-tax').innerText = `$${tax.toFixed(2)}`;
+            document.getElementById('lbl-total').innerText = `$${total.toFixed(2)}`;
+        }
+
+        // --- ACCIONES FINALES ---
+        function printCommand() {
+            const items = cart[currentTable] || [];
+            if (items.length === 0) return alert("Mesa vacía");
+
+            // Simulación de impresión
+            const tableNum = currentTable;
+            alert(`🖨️ IMPRIMIENDO COMANDA DE COCINA...\n\nMESA: ${tableNum}\nITEMS: ${items.length}\n\n(Enviado a impresora térmica)`);
+        }
+
+        function payOrder() {
+            const items = cart[currentTable] || [];
+            if (items.length === 0) return alert("No hay nada que cobrar.");
+
+            const total = document.getElementById('lbl-total').innerText;
+
+            if (confirm(`¿Confirmar cobro de ${total} a la MESA ${currentTable}?`)) {
+                // Limpiar mesa
+                cart[currentTable] = [];
+                renderCart();
+                showTables();
+
+                // Feedback visual
+                setTimeout(() => alert("✅ ¡COBRO EXITOSO!\nTicket cerrado y mesa liberada."), 300);
+            }
+        }
+
+        // Iniciar
+        init();
+    </script>
+</body>
+
+</html>

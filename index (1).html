@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Chef Franko Salgado - Ritual Digital</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            'serif': ['Playfair Display', 'serif'],
+            'sans': ['Inter', 'sans-serif'],
+          },
+          colors: {
+            'brand-primary': '#1a365d',
+            'brand-secondary': '#d69e2e',
+            'brand-accent': '#2d3748',
+            'brand-light': '#f7fafc',
+            'brand-cream': '#fffbf0',
+          }
+        }
+      }
+    }
+  </script>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;700&display=swap" rel="stylesheet" />
+  <style>
+    /* Aquí va todo tu CSS ceremonial que ya has definido */
+    /* Puedes pegarlo directamente desde tu archivo o mantenerlo enlazado */
+  </style>
+</head>
+<body class="text-brand-accent bg-brand-light font-sans">
+
+  <!-- Encabezado -->
+  <header class="nav-fixed text-center py-4 font-serif text-brand-primary animate-slideInLeft">
+    <h1 class="text-3xl font-bold">Chef Franko Salgado</h1>
+    <p class="text-brand-secondary italic">Ritualizando la hospitalidad, digitalizando la belleza</p>
+  </header>
+
+  <!-- Habilidades -->
+  <section class="section-card p-6 mt-20 mb-6">
+    <h2 class="text-xl font-semibold mb-4">Habilidades ceremoniales</h2>
+    <div class="mb-4">
+      <p class="mb-1">Diseño ritual de flujos digitales</p>
+      <div class="skill-bar"><div class="skill-progress" style="width: 90%;"></div></div>
+    </div>
+    <div class="mb-4">
+      <p class="mb-1">Comunicación emocional y estratégica</p>
+      <div class="skill-bar"><div class="skill-progress" style="width: 95%;"></div></div>
+    </div>
+  </section>
+
+  <!-- Línea del tiempo -->
+  <section class="section-card p-6">
+    <h2 class="text-xl font-semibold mb-4">Mi camino ceremonial</h2>
+    <div class="timeline-item">
+      <h3 class="font-bold">2023 – Ritualización de formularios</h3>
+      <p>Transformé formularios digitales en experiencias de bienvenida emocional.</p>
+    </div>
+    <div class="timeline-item">
+      <h3 class="font-bold">2024 – Branding ceremonial</h3>
+      <p>Integré logos, colores y tipografías que reflejan presencia y belleza.</p>
+    </div>
+  </section>
+
+  <!-- Galería -->
+  <section class="section-card p-6">
+    <h2 class="text-xl font-semibold mb-4">Galería ritual</h2>
+    <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+      <div class="gallery-item" onclick="openModal('img1.jpg')">
+        <img src="img1.jpg" alt="Ceremonia 1" class="w-full h-auto">
+        <div class="gallery-overlay">Ver más</div>
+      </div>
+    </div>
+  </section>
+
+  <div id="modal" class="modal">
+    <div class="modal-content p-4">
+      <img id="modal-img" src="" alt="Detalle" class="w-full h-auto rounded">
+    </div>
+  </div>
+
+  <!-- Agenda Wellness -->
+  <section class="section-card p-6">
+    <h2 class="text-xl font-semibold mb-4">Agenda Wellness</h2>
+    <ul class="space-y-4">
+      <li class="flex justify-between items-center">
+        <span>🌅 7:00 AM – Respiración consciente y té de bienvenida</span>
+        <span class="text-brand-secondary">Ritual de apertura</span>
+      </li>
+      <li class="flex justify-between items-center">
+        <span>🍃 10:00 AM – Caminata guiada por el jardín</span>
+        <span class="text-brand-secondary">Conexión con la naturaleza</span>
+      </li>
+      <li class="flex justify-between items-center">
+        <span>🌊 1:00 PM – Almuerzo sensorial frente al mar</span>
+        <span class="text-brand-secondary">Nutrición consciente</span>
+      </li>
+      <li class="flex justify-between items-center">
+        <span>🌙 8:00 PM – Meditación con fuego y cacao</span>
+        <span class="text-brand-secondary">Cierre del día</span>
+      </li>
+    </ul>
+  </section>
+
+  <!-- Menú Ritual -->
+  <section class="section-card p-6">
+    <h2 class="text-xl font-semibold mb-4">Menú Ritual</h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div class="p-4 border rounded-lg shadow-sm bg-brand-cream">
+        <h3 class="text-lg font-serif text-brand-primary mb-2">Entrada: “Despertar del Alma”</h3>
+        <p class="text-gray-700">Tartar de atún con cítricos y flor de sal.</p>
+      </div>
+      <div class="p-4 border rounded-lg shadow-sm bg-brand-cream">
+        <h3 class="text-lg font-serif text-brand-primary mb-2">Plato Fuerte: “Raíces del Corazón”</h3>
+        <p class="text-gray-700">Filete de res en reducción de cacao y chile pasilla.</p>
+      </div>
+      <div class="p-4 border rounded-lg shadow-sm bg-brand-cream">
+        <h3 class="text-lg font-serif text-brand-primary mb-2">Postre: “Silencio Dulce”</h3>
+        <p class="text-gray-700">Espuma de coco con esencia de lavanda.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Formulario de Intención -->
+  <section class="section-card p-6">
+    <h2 class="text-xl font-semibold mb-4">Formulario de Intención</h2>
+    <form class="space-y-4">
+      <input type="text" placeholder="Nombre completo" class="w-full p-2 border rounded">
+      <textarea placeholder="¿Cuál es tu intención para esta experiencia?" class="w-full p-2 border rounded"></textarea>
+      <select class="w-full p-2 border rounded">
+        <option>Selecciona tu energía predominante</option>
+        <option>Renovación</option>
+        <option>Sanación</option>
+        <option>Celebración</option>
+      </select>
+      <button type="submit" class="bg-brand-secondary text-white px-4 py-2 rounded">Enviar intención</button>
+    </form>
+  </section>
+
+  <!-- Testimonios -->
+  <section class="section-card p-6">
+    <h2 class="text-xl font-semibold mb-4">Testimonios Ceremoniales</h2>
+    <div class="space-y-6">
+      <div class="p-4 border rounded-lg bg-brand-light shadow-sm">
+        <p class="italic text-gray-700">“Franko no solo cocina, ritualiza.”</p>
+        <p class="text-right text-brand-secondary font-semibold mt-2">– Mariana</p>
+      </div>
+      <div class="p-4 border rounded-lg bg-brand-light shadow-sm">
+        <p class="italic text-gray-700">“Su forma de liderar es como una ceremonia.”</p>
+        <p class="text-right text-brand-secondary font-semibold mt-2">– Diego</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Toggle de idioma -->
+  <section class="section-card p-6">
+    <h2 class="text-xl font-semibold mb-4">Idioma</h2>
+    <label class="lang-toggle">
+      <input type="checkbox" onchange="toggleLang(this)">
+      <span class="lang-slider"></span>
+    </label>
+  </section>
+
+  <script>
+    function toggleLang(el) {
+      const lang = el.checked ? 'en' : 'es';
+      document.documentElement.lang = lang;
+    }
+  </script>
+
+  <!-- Botón flotante -->
+  <div class="floating-contact" onclick="window.open('https://wa.me/52XXXXXXXXXX', '_blank')">
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round"
+
+ d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4m16-10V5a2 2 0 00-2-2H5a2 2 0 00-2 2v4m16 0H5" />
+    </svg>
+  </div>
+
+  <!-- Footer -->
+  <footer class="section-card p-6 text-center text-sm text-gray-600 mt-12">
+    <p class="mb-2">© 2025 Chef Franko Salgado · Todos los rituales reservados</p>
+    <div class="flex justify-center space-x-4">
+      <a href="mailto:franko@chef4you.com" class="hover:text-brand-secondary">Email</a>
+      <a href="https://instagram.com/frankosagrado" target="_blank" class="hover:text-brand-secondary">Instagram</a>
+      <a href="https://chef4you.com" target="_blank" class="hover:text-brand-secondary">Sitio oficial</a>
+    </div>
+  </footer>
+
+  <!-- Modal Script -->
+  <script>
+    function openModal(src) {
+      document.getElementById('modal-img').src = src;
+      document.getElementById('modal').classList.add('active');
+    }
+    document.getElementById('modal').addEventListener('click', () => {
+      document.getElementById('modal').classList.remove('active');
+    });
+  </script>
+
+</body>
+</html>
+

@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Menú Explosivo - Chef Franko - Chef4You</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="language-selector.css">
+  <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            'serif': ['Playfair Display', 'serif'],
+            'sans': ['Inter', 'sans-serif'],
+          },
+          colors: {
+            'brand-primary': '#1a365d',
+            'brand-secondary': '#d69e2e',
+            'brand-accent': '#2d3748',
+            'brand-light': '#f7fafc',
+            'brand-cream': '#fffbf0',
+          }
+        }
+      }
+    }
+  </script>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #0f172a;
+      color: #e2e8f0;
+      overflow-x: hidden;
+    }
+
+    /* HERO EXPLOSIVO */
+    .hero-explosivo {
+      position: relative;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #1a365d 0%, #0f172a 50%, #d69e2e 100%);
+      overflow: hidden;
+    }
+
+    .hero-explosivo::before {
+      content: '';
+      position: absolute;
+      width: 400px;
+      height: 400px;
+      background: radial-gradient(circle, rgba(214, 158, 46, 0.3) 0%, transparent 70%);
+      border-radius: 50%;
+      top: -100px;
+      right: -100px;
+      animation: pulse-glow 4s ease-in-out infinite;
+    }
+
+    .hero-explosivo::after {
+      content: '';
+      position: absolute;
+      width: 300px;
+      height: 300px;
+      background: radial-gradient(circle, rgba(214, 158, 46, 0.2) 0%, transparent 70%);
+      border-radius: 50%;
+      bottom: -100px;
+      left: -100px;
+      animation: pulse-glow 5s ease-in-out infinite;
+    }
+
+    @keyframes pulse-glow {
+      0%, 100% { transform: scale(1); opacity: 0.5; }
+      50% { transform: scale(1.2); opacity: 0.8; }
+    }
+
+    @keyframes fadeInDown {
+      from {
+        opacity: 0;
+        transform: translateY(-30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes slideUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 10;
+      text-align: center;
+      animation: fadeInDown 1s ease-out;
+    }
+
+    .hero-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 5rem;
+      font-weight: 700;
+      color: #d69e2e;
+      text-shadow: 0 4px 20px rgba(214, 158, 46, 0.5);
+      margin-bottom: 1rem;
+      letter-spacing: 2px;
+    }
+
+    .hero-subtitle {
+      font-size: 1.5rem;
+      color: #e2e8f0;
+      margin-bottom: 2rem;
+      font-style: italic;
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+    }
+
+    .hero-btn {
+      display: inline-block;
+      padding: 1rem 3rem;
+      background: linear-gradient(135deg, #d69e2e 0%, #c67c22 100%);
+      color: white;
+      text-decoration: none;
+      border-radius: 50px;
+      font-weight: 700;
+      font-size: 1.1rem;
+      transition: all 0.3s ease;
+      box-shadow: 0 8px 25px rgba(214, 158, 46, 0.4);
+      border: 2px solid #d69e2e;
+      cursor: pointer;
+    }
+
+    .hero-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 35px rgba(214, 158, 46, 0.6);
+      background: #d69e2e;
+    }
+
+    /* CONTENIDO */
+    .container-menu {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 4rem 2rem;
+    }
+
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 3rem;
+      color: #d69e2e;
+      margin-bottom: 3rem;
+      text-align: center;
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+    }
+
+    /* SELECTOR DE DÍAS */
+    .days-selector {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 1rem;
+      margin-bottom: 3rem;
+    }
+
+    .day-btn {
+      padding: 1.2rem;
+      background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+      color: #e2e8f0;
+      border: 2px solid #475569;
+      border-radius: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-size: 0.9rem;
+    }
+
+    .day-btn:hover {
+      transform: translateY(-4px);
+      border-color: #d69e2e;
+      box-shadow: 0 8px 20px rgba(214, 158, 46, 0.3);
+    }
+
+    .day-btn.active {
+      background: linear-gradient(135deg, #d69e2e 0%, #c67c22 100%);
+      border-color: #d69e2e;
+      color: white;
+      box-shadow: 0 12px 30px rgba(214, 158, 46, 0.5);
+      transform: scale(1.05);
+    }
+
+    /* COMIDA CATEGORÍAS */
+    .meal-type {
+      margin-bottom: 3rem;
+    }
+
+    .meal-header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 2rem;
+      padding-bottom: 1rem;
+      border-bottom: 3px solid #d69e2e;
+    }
+
+    .meal-icon {
+      font-size: 2.5rem;
+    }
+
+    .meal-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      color: #d69e2e;
+    }
+
+    /* GRID DE PLATOS */
+    .dishes-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 2rem;
+    }
+
+    .dish-card {
+      background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+      border: 2px solid #334155;
+      border-radius: 16px;
+      overflow: hidden;
+      transition: all 0.3s ease;
+      position: relative;
+      cursor: pointer;
+    }
+
+    .dish-card:hover {
+      border-color: #d69e2e;
+      transform: translateY(-8px);
+      box-shadow: 0 16px 40px rgba(214, 158, 46, 0.3);
+    }
+
+    .dish-image {
+      width: 100%;
+      height: 200px;
+      background: linear-gradient(135deg, #475569 0%, #334155 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .dish-image::after {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, transparent 0%, rgba(214, 158, 46, 0.2) 100%);
+    }
+
+    .dish-content {
+      padding: 1.5rem;
+    }
+
+    .dish-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem;
+      color: #d69e2e;
+      margin-bottom: 0.5rem;
+    }
+
+    .dish-description {
+      color: #cbd5e1;
+      font-size: 0.95rem;
+      line-height: 1.6;
+      margin-bottom: 1rem;
+    }
+
+    .dish-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 1rem;
+      border-top: 1px solid #475569;
+    }
+
+    .dish-price {
+      font-size: 1.3rem;
+      color: #d69e2e;
+      font-weight: 700;
+    }
+
+    .dish-badge {
+      display: inline-block;
+      padding: 0.4rem 0.8rem;
+      background: linear-gradient(135deg, #d69e2e 0%, #c67c22 100%);
+      color: #0f172a;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    /* CONTACTO */
+    .contact-section {
+      background: linear-gradient(135deg, #1a365d 0%, #2d3748 100%);
+      padding: 3rem;
+      border-radius: 16px;
+      text-align: center;
+      margin-top: 4rem;
+      border: 2px solid #d69e2e;
+    }
+
+    .contact-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.5rem;
+      color: #d69e2e;
+      margin-bottom: 1rem;
+    }
+
+    .contact-text {
+      color: #cbd5e1;
+      font-size: 1.1rem;
+      margin-bottom: 2rem;
+    }
+
+    .contact-buttons {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .contact-btn {
+      padding: 1rem 2rem;
+      background: linear-gradient(135deg, #d69e2e 0%, #c67c22 100%);
+      color: white;
+      text-decoration: none;
+      border-radius: 50px;
+      font-weight: 700;
+      transition: all 0.3s ease;
+      border: none;
+      cursor: pointer;
+    }
+
+    .contact-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 30px rgba(214, 158, 46, 0.5);
+    }
+
+    /* FOOTER */
+    .footer-menu {
+      background: #0f172a;
+      border-top: 2px solid #d69e2e;
+      padding: 2rem;
+      text-align: center;
+      color: #cbd5e1;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+      .hero-title {
+        font-size: 3rem;
+      }
+
+      .section-title {
+        font-size: 2rem;
+      }
+
+      .meal-name {
+        font-size: 1.5rem;
+      }
+
+      .dishes-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .days-selector {
+        grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+      }
+    }
+
+    /* ANIMACIONES */
+    @keyframes bounce-slow {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+
+    .animate-bounce-slow {
+      animation: bounce-slow 3s ease-in-out infinite;
+    }
+
+  </style>
+</head>
+<body>
+
+  <!-- HERO EXPLOSIVO -->
+  <section class="hero-explosivo">
+    <div class="hero-content">
+      <h1 class="hero-title">🔥 MENÚ EXPLOSIVO 🔥</h1>
+      <p class="hero-subtitle">Experiencias gastronómicas que encenderán tus sentidos</p>
+      <button class="hero-btn animate-bounce-slow" onclick="document.querySelector('.container-menu').scrollIntoView({behavior: 'smooth'})">
+        🔥 EXPLORA AHORA 🔥
+      </button>
+    </div>
+  </section>
+
+  <!-- CONTENIDO PRINCIPAL -->
+  <div class="container-menu">
+
+    <!-- SELECTOR DE DÍAS -->
+    <h2 class="section-title">📅 Elige Tu Día</h2>
+    <div class="days-selector">
+      <button class="day-btn active" onclick="filterDay(this, 'lunes')">🔴 Lunes</button>
+      <button class="day-btn" onclick="filterDay(this, 'martes')">🟠 Martes</button>
+      <button class="day-btn" onclick="filterDay(this, 'miercoles')">🟡 Miércoles</button>
+      <button class="day-btn" onclick="filterDay(this, 'jueves')">🟢 Jueves</button>
+      <button class="day-btn" onclick="filterDay(this, 'viernes')">🔵 Viernes</button>
+      <button class="day-btn" onclick="filterDay(this, 'sabado')">🟣 Sábado</button>
+      <button class="day-btn" onclick="filterDay(this, 'domingo')">⚫ Domingo</button>
+    </div>
+
+    <!-- DESAYUNO -->
+    <div class="meal-type" data-day="lunes">
+      <div class="meal-header">
+        <span class="meal-icon">🌅</span>
+        <h3 class="meal-name">Desayuno Explosivo</h3>
+      </div>
+      <div class="dishes-grid">
+        <div class="dish-card">
+          <div class="dish-image">🥞</div>
+          <div class="dish-content">
+            <div class="dish-name">Hotcakes de Fuego</div>
+            <p class="dish-description">Hotcakes caseros con chile habanero, miel y crema</p>
+            <div class="dish-footer">
+              <span class="dish-price">$185</span>
+              <span class="dish-badge">Picante</span>
+            </div>
+          </div>
+        </div>
+        <div class="dish-card">
+          <div class="dish-image">🍳</div>
+          <div class="dish-content">
+            <div class="dish-name">Huevos Ceremoniales</div>
+            <p class="dish-description">Huevos poché con trufa negra y puntas de espárago</p>
+            <div class="dish-footer">
+              <span class="dish-price">$220</span>
+              <span class="dish-badge">Premium</span>
+            </div>
+          </div>
+        </div>
+        <div class="dish-card">
+          <div class="dish-image">🥑</div>
+          <div class="dish-content">
+            <div class="dish-name">Tostadas de Aguacate</div>
+            <p class="dish-description">Aguacate fresco, limón, cilantro y semillas de calabaza</p>
+            <div class="dish-footer">
+              <span class="dish-price">$150</span>
+              <span class="dish-badge">Vegano</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- COMIDA -->
+    <div class="meal-type" data-day="lunes">
+      <div class="meal-header">
+        <span class="meal-icon">🍽️</span>
+        <h3 class="meal-name">Comida Principal</h3>
+      </div>
+      <div class="dishes-grid">
+        <div class="dish-card">
+          <div class="dish-image">🐟</div>
+          <div class="dish-content">
+            <div class="dish-name">Ceviche de Lujo</div>
+            <p class="dish-description">Robalo fresco, limón, cilantro, aguacate y jalapeños</p>
+            <div class="dish-footer">
+              <span class="dish-price">$320</span>
+              <span class="dish-badge">Fresco</span>
+            </div>
+          </div>
+        </div>
+        <div class="dish-card">
+          <div class="dish-image">🥩</div>
+          <div class="dish-content">
+            <div class="dish-name">Carne Negra a la Piedra</div>
+            <p class="dish-description">Filete prime en salsa de cacao y chile guajillo</p>
+            <div class="dish-footer">
+              <span class="dish-price">$420</span>
+              <span class="dish-badge">Espectacular</span>
+            </div>
+          </div>
+        </div>
+        <div class="dish-card">
+          <div class="dish-image">🦞</div>
+          <div class="dish-content">
+            <div class="dish-name">Langosta Ceremonial</div>
+            <p class="dish-description">Langosta al achiote con verduras de estación</p>
+            <div class="dish-footer">
+              <span class="dish-price">$520</span>
+              <span class="dish-badge">Lujo</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CENA -->
+    <div class="meal-type" data-day="lunes">
+      <div class="meal-header">
+        <span class="meal-icon">🌙</span>
+        <h3 class="meal-name">Cena de Ensueño</h3>
+      </div>
+      <div class="dishes-grid">
+        <div class="dish-card">
+          <div class="dish-image">🍷</div>
+          <div class="dish-content">
+            <div class="dish-name">Tabla de Quesos Artesanales</div>
+            <p class="dish-description">Selección de quesos mexicanos premium con vinos locales</p>
+            <div class="dish-footer">
+              <span class="dish-price">$280</span>
+              <span class="dish-badge">Variado</span>
+            </div>
+          </div>
+        </div>
+        <div class="dish-card">
+          <div class="dish-image">🍄</div>
+          <div class="dish-content">
+            <div class="dish-name">Risotto de Hongos Silvestres</div>
+            <p class="dish-description">Risotto cremoso con champiñones y trufa</p>
+            <div class="dish-footer">
+              <span class="dish-price">$250</span>
+              <span class="dish-badge">Sofisticado</span>
+            </div>
+          </div>
+        </div>
+        <div class="dish-card">
+          <div class="dish-image">🐙</div>
+          <div class="dish-content">
+            <div class="dish-name">Pulpo a la Brasa</div>
+            <p class="dish-description">Pulpo tierno a la brasa con alioli de ajo negro</p>
+            <div class="dish-footer">
+              <span class="dish-price">$350</span>
+              <span class="dish-badge">Marinero</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CONTACTO -->
+    <section class="contact-section">
+      <h2 class="contact-title">🔥 ¡ORDENA AHORA! 🔥</h2>
+      <p class="contact-text">Experimenta nuestras creaciones gastronómicas explosivas</p>
+      <div class="contact-buttons">
+        <a href="pages/galeria.html" class="contact-btn">
+          🎬 Galería
+        </a>
+        <a href="pages/formulario-cliente.html" class="contact-btn">
+          📋 Formulario de Reserva
+        </a>
+        <a href="https://wa.me/5232216068743?text=Hola%20Chef%20Franko%20quiero%20reservar%20una%20experiencia" class="contact-btn" target="_blank">
+          💬 WhatsApp
+        </a>
+        <a href="tel:+5232216068743" class="contact-btn">
+          ☎️ Llamar
+        </a>
+        <a href="mailto:franko@chef4you.com" class="contact-btn">
+          📧 Email
+        </a>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="footer-menu">
+    <p>© 2026 Chef Franko Salgado - Chef4You 🔥</p>
+    <p style="margin-top: 0.5rem; font-size: 0.9rem;">Ubicado en Chef4You, Nayarit, México</p>
+  </footer>
+
+  <!-- LANGUAGE SELECTOR -->
+  <div id="google_translate_element" style="display: none;"></div>
+  <script src="language-selector.js"></script>
+
+  <script>
+    function googleTranslateElementInit() {}
+
+    function filterDay(btn, day) {
+      // Actualizar botón activo
+      document.querySelectorAll('.day-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      // Mostrar/ocultar secciones (por ahora mostramos todo para Lunes)
+      document.querySelectorAll('.meal-type').forEach(section => {
+        section.style.display = 'block';
+      });
+    }
+
+    // Animación al cargar
+    window.addEventListener('load', () => {
+      document.querySelectorAll('.dish-card').forEach((card, index) => {
+        card.style.animation = `slideUp 0.5s ease-out ${index * 0.1}s both`;
+      });
+    });
+  </script>
+
+</body>
+</html>

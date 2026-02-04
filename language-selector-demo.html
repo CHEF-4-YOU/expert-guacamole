@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Language Selector - Demo | Chef Franko</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+  <link rel="stylesheet" href="language-selector.css">
+  <style>
+    body {
+      background: linear-gradient(135deg, #f7fafc 0%, #f0f4f8 100%);
+      font-family: 'Inter', sans-serif;
+    }
+
+    .demo-container {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+
+    .feature-card {
+      background: white;
+      padding: 2rem;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+      border-left: 4px solid #d69e2e;
+    }
+
+    .feature-card h3 {
+      color: #1a365d;
+      margin-bottom: 1rem;
+      font-weight: 700;
+      font-size: 1.2rem;
+    }
+
+    .feature-card p {
+      color: #64748b;
+      line-height: 1.6;
+      font-size: 0.95rem;
+    }
+
+    .code-block {
+      background: #0f1419;
+      color: #e2e8f0;
+      padding: 1.5rem;
+      border-radius: 8px;
+      overflow-x: auto;
+      margin-top: 1rem;
+      font-family: 'Courier New', monospace;
+      font-size: 0.85rem;
+      line-height: 1.5;
+    }
+
+    .highlight {
+      background: linear-gradient(120deg, #d69e2e 0%, #c67c22 100%);
+      color: white;
+      padding: 2rem;
+      border-radius: 12px;
+      text-align: center;
+      margin: 2rem 0;
+    }
+
+    .highlight h2 {
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+      font-weight: 700;
+    }
+
+    .highlight p {
+      font-size: 1.1rem;
+      opacity: 0.95;
+    }
+
+    .status-indicator {
+      display: inline-block;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #10b981;
+      animation: pulse 2s ease-in-out infinite;
+      margin-right: 0.5rem;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.5; }
+    }
+
+    .languages-showcase {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+
+    .language-item {
+      background: white;
+      padding: 1.5rem;
+      border-radius: 8px;
+      text-align: center;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+      transition: all 0.3s ease;
+    }
+
+    .language-item:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 20px rgba(214, 158, 46, 0.2);
+    }
+
+    .language-item .flag {
+      font-size: 3rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .language-item .name {
+      font-weight: 600;
+      color: #1a365d;
+      margin-bottom: 0.25rem;
+    }
+
+    .language-item .code {
+      color: #d69e2e;
+      font-size: 0.85rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    @media (max-width: 768px) {
+      .languages-showcase {
+        grid-template-columns: 1fr;
+      }
+
+      .highlight h2 {
+        font-size: 1.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="bg-white shadow-sm py-4 mb-8">
+    <div class="demo-container flex justify-between items-center">
+      <div>
+        <h1 class="text-3xl font-bold text-brand-primary">Chef Franko Salgado</h1>
+        <p class="text-brand-secondary italic text-sm">Language Selector Demo</p>
+      </div>
+    </div>
+  </header>
+
+  <div class="demo-container">
+    <div class="highlight">
+      <h2>🌍 Selector de Idiomas / Language Selector</h2>
+      <p>Prueba hacer click en las banderas en la esquina inferior derecha (móvil) o en el header (desktop)</p>
+      <p style="font-size: 0.95rem; margin-top: 1rem; opacity: 0.85;">Try clicking on the flags in the bottom-right (mobile) or header (desktop)</p>
+    </div>
+
+    <!-- Status -->
+    <div style="background: #f0fdf4; padding: 1.5rem; border-radius: 8px; margin-bottom: 2rem; border-left: 4px solid #10b981;">
+      <p style="color: #1f2937; font-weight: 600;">
+        <span class="status-indicator"></span>Sistema activo - System active
+      </p>
+      <p style="color: #6b7280; font-size: 0.9rem; margin-top: 0.5rem;">
+        El selector está funcionando. Tu preferencia de idioma se guardará en localStorage.
+      </p>
+    </div>
+
+    <!-- Languages Showcase -->
+    <h2 style="font-size: 1.8rem; font-weight: 700; color: #1a365d; margin-top: 3rem;">Idiomas Disponibles / Available Languages</h2>
+    <div class="languages-showcase">
+      <div class="language-item">
+        <div class="flag">🇲🇽</div>
+        <div class="name">Español</div>
+        <div class="code">ES</div>
+      </div>
+      <div class="language-item">
+        <div class="flag">🇬🇧</div>
+        <div class="name">English</div>
+        <div class="code">EN</div>
+      </div>
+      <div class="language-item">
+        <div class="flag">🇫🇷</div>
+        <div class="name">Français</div>
+        <div class="code">FR</div>
+      </div>
+    </div>
+
+    <!-- Features -->
+    <h2 style="font-size: 1.8rem; font-weight: 700; color: #1a365d; margin-top: 3rem;">Características / Features</h2>
+    <div class="feature-grid">
+      <div class="feature-card">
+        <h3>✨ Diseño Elegante</h3>
+        <p>Interfaz minimalista con banderas de países. Tamaño perfecto (24-30px) y completamente responsive.</p>
+      </div>
+
+      <div class="feature-card">
+        <h3>🎨 Efectos Visuales</h3>
+        <p>Hover effects, animaciones suaves, transiciones CSS3, y soporte para dark mode.</p>
+        <div class="code-block">
+.lang-flag:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(...);
+}
+        </div>
+      </div>
+
+      <div class="feature-card">
+        <h3>🌐 Google Translate</h3>
+        <p>Integración automática con Google Translate API para traducción en tiempo real.</p>
+      </div>
+
+      <div class="feature-card">
+        <h3>💾 localStorage</h3>
+        <p>Tu preferencia de idioma se guarda localmente. Se recuerda tu elección en futuras visitas.</p>
+      </div>
+
+      <div class="feature-card">
+        <h3>📱 Responsive</h3>
+        <p>Desktop: horizontal en header. Móvil: vertical en esquina inferior derecha.</p>
+      </div>
+
+      <div class="feature-card">
+        <h3>♿ Accesibilidad</h3>
+        <p>ARIA labels, soporte para teclado, respeta preferencias de movimiento reducido.</p>
+      </div>
+    </div>
+
+    <!-- Implementation Guide -->
+    <h2 style="font-size: 1.8rem; font-weight: 700; color: #1a365d; margin-top: 3rem;">Implementación / Implementation</h2>
+
+    <div class="feature-card" style="border-left: 4px solid #3b82f6;">
+      <h3 style="color: #3b82f6;">1. Incluir CSS</h3>
+      <div class="code-block">
+&lt;link rel="stylesheet" href="language-selector.css"&gt;
+      </div>
+    </div>
+
+    <div class="feature-card" style="border-left: 4px solid #3b82f6; margin-top: 1rem;">
+      <h3 style="color: #3b82f6;">2. Google Translate API</h3>
+      <div class="code-block">
+&lt;script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"&gt;&lt;/script&gt;
+&lt;div id="google_translate_element" style="display: none;"&gt;&lt;/div&gt;
+      </div>
+    </div>
+
+    <div class="feature-card" style="border-left: 4px solid #3b82f6; margin-top: 1rem;">
+      <h3 style="color: #3b82f6;">3. JavaScript</h3>
+      <div class="code-block">
+&lt;script src="language-selector.js"&gt;&lt;/script&gt;
+&lt;script&gt;
+  function googleTranslateElementInit() {
+    // Requerida por Google Translate
+  }
+&lt;/script&gt;
+      </div>
+    </div>
+
+    <!-- Testing Instructions -->
+    <h2 style="font-size: 1.8rem; font-weight: 700; color: #1a365d; margin-top: 3rem;">Pruebas / Testing</h2>
+    
+    <div style="background: #fef3c7; padding: 1.5rem; border-radius: 8px; margin-bottom: 2rem; border-left: 4px solid #f59e0b;">
+      <h3 style="color: #92400e; margin-bottom: 1rem;">Checklist de Verificación</h3>
+      <ul style="color: #78350f; list-style: disc; margin-left: 2rem;">
+        <li>✓ El selector aparece en la pantalla</li>
+        <li>✓ Las banderas tienen hover effects (elevadas, con borde dorado)</li>
+        <li>✓ Al hacer click, la bandera activa cambia de color (dorado)</li>
+        <li>✓ La página se traduce después de 2-3 segundos</li>
+        <li>✓ El idioma se guarda (recarga la página y debe mantener la elección)</li>
+        <li>✓ En móvil, el selector aparece en esquina inferior derecha</li>
+        <li>✓ No hay errores en la consola del navegador</li>
+      </ul>
+    </div>
+
+    <!-- Browser Compatibility -->
+    <h2 style="font-size: 1.8rem; font-weight: 700; color: #1a365d; margin-top: 3rem;">Compatibilidad / Compatibility</h2>
+    
+    <div class="feature-grid">
+      <div class="feature-card">
+        <h3>Chrome/Edge 90+</h3>
+        <p>✅ Totalmente soportado. Mejor rendimiento.</p>
+      </div>
+      <div class="feature-card">
+        <h3>Firefox 88+</h3>
+        <p>✅ Completamente compatible. Sin problemas.</p>
+      </div>
+      <div class="feature-card">
+        <h3>Safari 14+</h3>
+        <p>✅ Funciona perfectamente. Incluyendo iOS.</p>
+      </div>
+    </div>
+
+    <!-- Files Provided -->
+    <h2 style="font-size: 1.8rem; font-weight: 700; color: #1a365d; margin-top: 3rem;">Archivos Incluidos / Files Provided</h2>
+    
+    <div style="background: white; padding: 2rem; border-radius: 8px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);">
+      <ul style="list-style: none; space-y: 1.5rem;">
+        <li style="margin-bottom: 1rem; padding: 1rem; background: #f8fafc; border-radius: 6px; border-left: 3px solid #d69e2e;">
+          <strong>language-selector.js</strong><br>
+          <span style="color: #64748b; font-size: 0.9rem;">Lógica principal del selector con Google Translate API</span>
+        </li>
+        <li style="margin-bottom: 1rem; padding: 1rem; background: #f8fafc; border-radius: 6px; border-left: 3px solid #d69e2e;">
+          <strong>language-selector.css</strong><br>
+          <span style="color: #64748b; font-size: 0.9rem;">Estilos, animaciones, responsive design</span>
+        </li>
+        <li style="margin-bottom: 1rem; padding: 1rem; background: #f8fafc; border-radius: 6px; border-left: 3px solid #d69e2e;">
+          <strong>welcome.html</strong><br>
+          <span style="color: #64748b; font-size: 0.9rem;">Página de bienvenida con selector integrado</span>
+        </li>
+        <li style="margin-bottom: 1rem; padding: 1rem; background: #f8fafc; border-radius: 6px; border-left: 3px solid #d69e2e;">
+          <strong>index.html</strong><br>
+          <span style="color: #64748b; font-size: 0.9rem;">Página principal con selector integrado</span>
+        </li>
+        <li style="padding: 1rem; background: #f8fafc; border-radius: 6px; border-left: 3px solid #d69e2e;">
+          <strong>menu verano.html</strong><br>
+          <span style="color: #64748b; font-size: 0.9rem;">Menú semanal con selector integrado</span>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Contact -->
+    <div class="highlight" style="background: linear-gradient(135deg, #1a365d 0%, #2d3748 100%); margin-top: 4rem;">
+      <h2 style="color: white;">¿Necesitas Ayuda? / Need Help?</h2>
+      <p style="color: #e2e8f0;">Contacta a Chef Franko</p>
+      <p style="font-size: 1rem; margin-top: 0.5rem;">
+        <a href="tel:+5232216068743" style="color: #d69e2e; text-decoration: none; font-weight: 600;">+5232216068743</a> · 
+        <a href="https://wa.me/523221606843" style="color: #d69e2e; text-decoration: none; font-weight: 600;">WhatsApp</a> · 
+        <a href="mailto:franko@chef4you.com" style="color: #d69e2e; text-decoration: none; font-weight: 600;">Email</a>
+      </p>
+    </div>
+
+  </div>
+
+  <!-- Google Translate Element (hidden) -->
+  <div id="google_translate_element" style="display: none;"></div>
+
+  <!-- Language Selector Script -->
+  <script src="language-selector.js"></script>
+
+  <script>
+    function googleTranslateElementInit() {
+      // Esta función es requerida por el script de Google Translate
+    }
+  </script>
+
+</body>
+</html>

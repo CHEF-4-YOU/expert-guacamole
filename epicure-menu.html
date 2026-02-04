@@ -1,0 +1,1313 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <!-- SEO -->
+  <title>Epicure Menu | Chef4You - Chef Franko Salgado</title>
+  <meta name="description" content="Descubre el Epicure Menu de Chef Franko Salgado. Cocina de autor con ingredientes selectos, experiencias gastronomicas unicas en Nayarit, Mexico.">
+  
+  <!-- Open Graph -->
+  <meta property="og:title" content="Epicure Menu | Chef4You">
+  <meta property="og:description" content="Menu de autor con creaciones exclusivas del Chef Franko Salgado">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://chef4you.com/og-image.jpg">
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500&family=Montserrat:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --gold: #c9a962;
+      --gold-light: #e8d5a3;
+      --gold-dark: #8b7355;
+      --black: #0a0a0a;
+      --black-light: #1a1a1a;
+      --black-soft: #2a2a2a;
+      --white: #fafafa;
+      --white-soft: #f0ede8;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background: var(--black);
+      color: var(--white);
+      line-height: 1.6;
+    }
+
+    ::selection {
+      background: var(--gold);
+      color: var(--black);
+    }
+
+    /* NAVEGACION */
+    .nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      padding: 1.5rem 4rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 1000;
+      background: rgba(10, 10, 10, 0.95);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(201, 169, 98, 0.1);
+    }
+
+    .nav-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.8rem;
+      font-weight: 400;
+      color: var(--gold);
+      text-decoration: none;
+      letter-spacing: 0.3rem;
+    }
+
+    .nav-center {
+      display: flex;
+      gap: 2.5rem;
+      list-style: none;
+    }
+
+    .nav-center a {
+      color: var(--white);
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 300;
+      letter-spacing: 0.15rem;
+      text-transform: uppercase;
+      transition: color 0.3s ease;
+    }
+
+    .nav-center a:hover {
+      color: var(--gold);
+    }
+
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+    }
+
+    .nav-cta {
+      padding: 0.8rem 2rem;
+      background: var(--gold);
+      color: var(--black);
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.2rem;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: all 0.4s ease;
+    }
+
+    .nav-cta:hover {
+      background: var(--gold-light);
+      box-shadow: 0 10px 40px rgba(201, 169, 98, 0.3);
+    }
+
+    /* Language Selector */
+    .lang-selector {
+      position: relative;
+    }
+
+    .lang-btn {
+      background: transparent;
+      border: 1px solid rgba(201, 169, 98, 0.3);
+      color: var(--gold);
+      padding: 0.5rem 1rem;
+      font-size: 0.8rem;
+      font-family: 'Montserrat', sans-serif;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: all 0.3s ease;
+    }
+
+    .lang-btn:hover {
+      background: rgba(201, 169, 98, 0.1);
+    }
+
+    .lang-dropdown {
+      position: absolute;
+      top: 100%;
+      right: 0;
+      background: var(--black-light);
+      border: 1px solid rgba(201, 169, 98, 0.2);
+      min-width: 150px;
+      display: none;
+      z-index: 100;
+    }
+
+    .lang-dropdown.show {
+      display: block;
+    }
+
+    .lang-option {
+      display: block;
+      width: 100%;
+      padding: 0.8rem 1rem;
+      background: transparent;
+      border: none;
+      color: var(--white);
+      font-size: 0.85rem;
+      font-family: 'Montserrat', sans-serif;
+      text-align: left;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .lang-option:hover {
+      background: rgba(201, 169, 98, 0.1);
+      color: var(--gold);
+    }
+
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 6px;
+      cursor: pointer;
+      z-index: 1001;
+    }
+
+    .hamburger span {
+      width: 30px;
+      height: 1px;
+      background: var(--gold);
+      transition: all 0.4s ease;
+    }
+
+    /* HERO */
+    .hero {
+      height: 100vh;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .hero-bg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: 
+        linear-gradient(to bottom, rgba(10, 10, 10, 0.5) 0%, rgba(10, 10, 10, 0.8) 100%),
+        url('https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1920&q=80');
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 10;
+      text-align: center;
+      max-width: 900px;
+      padding: 0 2rem;
+    }
+
+    .hero-label {
+      font-size: 0.85rem;
+      font-weight: 300;
+      letter-spacing: 0.5rem;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1.5rem;
+      opacity: 0;
+      animation: fadeInUp 1s ease 0.3s forwards;
+    }
+
+    .hero-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(4rem, 12vw, 8rem);
+      font-weight: 300;
+      font-style: italic;
+      line-height: 1;
+      margin-bottom: 1.5rem;
+      color: var(--white);
+      opacity: 0;
+      animation: fadeInUp 1s ease 0.5s forwards;
+    }
+
+    .hero-subtitle {
+      font-size: 1.1rem;
+      font-weight: 200;
+      color: rgba(255, 255, 255, 0.7);
+      max-width: 600px;
+      margin: 0 auto 2rem;
+      line-height: 1.8;
+      opacity: 0;
+      animation: fadeInUp 1s ease 0.7s forwards;
+    }
+
+    .hero-scroll {
+      position: absolute;
+      bottom: 3rem;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+      opacity: 0;
+      animation: fadeInUp 1s ease 1s forwards;
+    }
+
+    .hero-scroll span {
+      font-size: 0.7rem;
+      letter-spacing: 0.3rem;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.5);
+    }
+
+    .scroll-line {
+      width: 1px;
+      height: 60px;
+      background: linear-gradient(to bottom, var(--gold), transparent);
+      animation: scrollPulse 2s ease-in-out infinite;
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(40px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes scrollPulse {
+      0%, 100% { height: 60px; opacity: 1; }
+      50% { height: 40px; opacity: 0.5; }
+    }
+
+    /* MENU SECTION */
+    .menu-section {
+      padding: 8rem 4rem;
+      position: relative;
+    }
+
+    .menu-section:nth-child(even) {
+      background: var(--black-light);
+    }
+
+    .menu-section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 1px;
+      height: 80px;
+      background: linear-gradient(to bottom, var(--gold), transparent);
+    }
+
+    .section-header {
+      text-align: center;
+      max-width: 700px;
+      margin: 0 auto 5rem;
+    }
+
+    .section-label {
+      font-size: 0.75rem;
+      font-weight: 400;
+      letter-spacing: 0.4rem;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1rem;
+    }
+
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.5rem, 5vw, 3.5rem);
+      font-weight: 300;
+      line-height: 1.2;
+      margin-bottom: 1.5rem;
+    }
+
+    .section-desc {
+      font-size: 1rem;
+      font-weight: 300;
+      color: rgba(255, 255, 255, 0.6);
+      line-height: 1.8;
+    }
+
+    /* MENU GRID */
+    .menu-grid {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 3rem;
+    }
+
+    .menu-card {
+      background: rgba(26, 26, 26, 0.5);
+      border: 1px solid rgba(201, 169, 98, 0.1);
+      overflow: hidden;
+      transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .menu-card:hover {
+      border-color: rgba(201, 169, 98, 0.3);
+      transform: translateY(-5px);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+    }
+
+    .menu-card-image {
+      height: 250px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .menu-card-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.6s ease;
+      filter: brightness(0.9);
+    }
+
+    .menu-card:hover .menu-card-image img {
+      transform: scale(1.08);
+      filter: brightness(1);
+    }
+
+    .menu-card-image::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 50%;
+      background: linear-gradient(to top, rgba(10, 10, 10, 0.8), transparent);
+    }
+
+    .menu-card-content {
+      padding: 2rem;
+    }
+
+    .menu-card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 1rem;
+    }
+
+    .menu-card-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.5rem;
+      font-weight: 400;
+      color: var(--white);
+    }
+
+    .menu-card-price {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.3rem;
+      color: var(--gold);
+      white-space: nowrap;
+    }
+
+    .menu-card-desc {
+      font-size: 0.9rem;
+      font-weight: 300;
+      color: rgba(255, 255, 255, 0.6);
+      line-height: 1.7;
+      margin-bottom: 1rem;
+    }
+
+    .menu-card-tags {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+
+    .menu-tag {
+      font-size: 0.7rem;
+      letter-spacing: 0.1rem;
+      text-transform: uppercase;
+      color: var(--gold);
+      padding: 0.3rem 0.8rem;
+      border: 1px solid rgba(201, 169, 98, 0.3);
+    }
+
+    /* FEATURED DISH */
+    .featured-dish {
+      padding: 10rem 4rem;
+      background: 
+        linear-gradient(to right, rgba(10, 10, 10, 0.95) 0%, rgba(10, 10, 10, 0.7) 100%),
+        url('https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=1920&q=80');
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+    }
+
+    .featured-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6rem;
+      align-items: center;
+    }
+
+    .featured-content {
+      padding-right: 2rem;
+    }
+
+    .featured-label {
+      font-size: 0.75rem;
+      font-weight: 400;
+      letter-spacing: 0.4rem;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .featured-label::before {
+      content: '';
+      width: 40px;
+      height: 1px;
+      background: var(--gold);
+    }
+
+    .featured-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      font-weight: 300;
+      font-style: italic;
+      line-height: 1.2;
+      margin-bottom: 1.5rem;
+    }
+
+    .featured-desc {
+      font-size: 1rem;
+      font-weight: 300;
+      color: rgba(255, 255, 255, 0.7);
+      line-height: 1.9;
+      margin-bottom: 2rem;
+    }
+
+    .featured-price {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.5rem;
+      color: var(--gold);
+      margin-bottom: 2rem;
+    }
+
+    .featured-image {
+      position: relative;
+    }
+
+    .featured-image img {
+      width: 100%;
+      height: 500px;
+      object-fit: cover;
+      filter: brightness(0.9);
+    }
+
+    .featured-image::before {
+      content: '';
+      position: absolute;
+      top: -20px;
+      left: -20px;
+      width: 100%;
+      height: 100%;
+      border: 1px solid var(--gold);
+      z-index: -1;
+    }
+
+    /* MENU LIST STYLE */
+    .menu-list {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .menu-list-item {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 2rem;
+      padding: 2rem 0;
+      border-bottom: 1px solid rgba(201, 169, 98, 0.1);
+      transition: all 0.3s ease;
+    }
+
+    .menu-list-item:hover {
+      padding-left: 1rem;
+      border-color: var(--gold);
+    }
+
+    .menu-list-info h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.5rem;
+      font-weight: 400;
+      margin-bottom: 0.5rem;
+      color: var(--white);
+    }
+
+    .menu-list-info p {
+      font-size: 0.9rem;
+      font-weight: 300;
+      color: rgba(255, 255, 255, 0.5);
+      font-style: italic;
+    }
+
+    .menu-list-price {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.5rem;
+      color: var(--gold);
+      text-align: right;
+    }
+
+    /* CTA SECTION */
+    .cta-section {
+      padding: 8rem 4rem;
+      text-align: center;
+      background: linear-gradient(135deg, var(--black-soft) 0%, var(--black) 50%, rgba(201, 169, 98, 0.1) 100%);
+      position: relative;
+    }
+
+    .cta-section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    }
+
+    .cta-content {
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    .cta-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 5vw, 3rem);
+      font-weight: 300;
+      margin-bottom: 1.5rem;
+    }
+
+    .cta-text {
+      font-size: 1rem;
+      font-weight: 300;
+      color: rgba(255, 255, 255, 0.7);
+      margin-bottom: 2.5rem;
+      line-height: 1.8;
+    }
+
+    .cta-buttons {
+      display: flex;
+      gap: 1.5rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      padding: 1.2rem 3rem;
+      background: var(--gold);
+      color: var(--black);
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.2rem;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: all 0.4s ease;
+    }
+
+    .btn-primary:hover {
+      background: var(--gold-light);
+      transform: translateY(-3px);
+      box-shadow: 0 15px 40px rgba(201, 169, 98, 0.4);
+    }
+
+    .btn-secondary {
+      padding: 1.2rem 3rem;
+      background: transparent;
+      color: var(--white);
+      font-size: 0.8rem;
+      font-weight: 400;
+      letter-spacing: 0.2rem;
+      text-transform: uppercase;
+      text-decoration: none;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      transition: all 0.4s ease;
+    }
+
+    .btn-secondary:hover {
+      border-color: var(--gold);
+      color: var(--gold);
+      transform: translateY(-3px);
+    }
+
+    /* FOOTER */
+    .footer {
+      padding: 4rem;
+      background: var(--black-light);
+      border-top: 1px solid rgba(201, 169, 98, 0.1);
+    }
+
+    .footer-content {
+      max-width: 1400px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 2rem;
+    }
+
+    .footer-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.5rem;
+      color: var(--gold);
+      text-decoration: none;
+      letter-spacing: 0.3rem;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 2rem;
+    }
+
+    .footer-links a {
+      color: rgba(255, 255, 255, 0.6);
+      text-decoration: none;
+      font-size: 0.85rem;
+      transition: color 0.3s ease;
+    }
+
+    .footer-links a:hover {
+      color: var(--gold);
+    }
+
+    .footer-social {
+      display: flex;
+      gap: 1rem;
+    }
+
+    .social-link {
+      width: 45px;
+      height: 45px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid rgba(201, 169, 98, 0.3);
+      color: var(--gold);
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+
+    .social-link:hover {
+      background: var(--gold);
+      color: var(--black);
+      transform: translateY(-3px);
+    }
+
+    .footer-bottom {
+      max-width: 1400px;
+      margin: 2rem auto 0;
+      padding-top: 2rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      text-align: center;
+      color: rgba(255, 255, 255, 0.4);
+      font-size: 0.85rem;
+    }
+
+    /* Mobile Menu */
+    .mobile-menu {
+      position: fixed;
+      top: 0;
+      right: -100%;
+      width: 100%;
+      height: 100vh;
+      background: var(--black);
+      z-index: 999;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 2rem;
+      transition: right 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .mobile-menu.active {
+      right: 0;
+    }
+
+    .mobile-menu a {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2rem;
+      color: var(--white);
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    .mobile-menu a:hover {
+      color: var(--gold);
+    }
+
+    /* WhatsApp flotante */
+    .whatsapp-float {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      width: 60px;
+      height: 60px;
+      background: #25D366;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      text-decoration: none;
+      box-shadow: 0 10px 30px rgba(37, 211, 102, 0.4);
+      z-index: 100;
+      transition: all 0.3s ease;
+    }
+
+    .whatsapp-float:hover {
+      transform: scale(1.1) translateY(-5px);
+      box-shadow: 0 15px 40px rgba(37, 211, 102, 0.5);
+    }
+
+    /* Reveal Animation */
+    .reveal {
+      opacity: 0;
+      transform: translateY(50px);
+      transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .reveal.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 1024px) {
+      .nav {
+        padding: 1.5rem 2rem;
+      }
+
+      .nav-center {
+        display: none;
+      }
+
+      .nav-cta {
+        display: none;
+      }
+
+      .hamburger {
+        display: flex;
+      }
+
+      .featured-container {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+      }
+
+      .featured-content {
+        padding-right: 0;
+        text-align: center;
+      }
+
+      .featured-label {
+        justify-content: center;
+      }
+
+      .featured-label::before {
+        display: none;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .menu-section {
+        padding: 5rem 1.5rem;
+      }
+
+      .menu-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+
+      .featured-dish {
+        padding: 5rem 1.5rem;
+      }
+
+      .featured-image img {
+        height: 350px;
+      }
+
+      .featured-image::before {
+        display: none;
+      }
+
+      .footer-content {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .footer-links {
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+
+      .lang-selector {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navegacion -->
+  <nav class="nav">
+    <a href="index.html" class="nav-logo">CHEF4YOU</a>
+    <ul class="nav-center">
+      <li><a href="index.html">Inicio</a></li>
+      <li><a href="index.html#about">Sobre Mi</a></li>
+      <li><a href="index.html#services">Servicios</a></li>
+      <li><a href="#menu">Menu</a></li>
+      <li><a href="index.html#contact">Contacto</a></li>
+    </ul>
+    <div class="nav-right">
+      <div class="lang-selector">
+        <button class="lang-btn" id="langBtn">
+          <span id="currentLang">ES</span>
+          <svg width="10" height="10" viewBox="0 0 10 10" fill="currentColor">
+            <path d="M5 7L1 3h8z"/>
+          </svg>
+        </button>
+        <div class="lang-dropdown" id="langDropdown">
+          <button class="lang-option" data-lang="es">Espanol</button>
+          <button class="lang-option" data-lang="en">English</button>
+          <button class="lang-option" data-lang="fr">Francais</button>
+          <button class="lang-option" data-lang="de">Deutsch</button>
+          <button class="lang-option" data-lang="it">Italiano</button>
+          <button class="lang-option" data-lang="pt">Portugues</button>
+        </div>
+      </div>
+      <a href="pages/formulario-cliente.html" class="nav-cta">Reservar</a>
+      <div class="hamburger" id="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Mobile Menu -->
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="index.html" onclick="closeMobileMenu()">Inicio</a>
+    <a href="index.html#about" onclick="closeMobileMenu()">Sobre Mi</a>
+    <a href="#menu" onclick="closeMobileMenu()">Menu</a>
+    <a href="pages/formulario-cliente.html" onclick="closeMobileMenu()">Reservar</a>
+    <a href="index.html#contact" onclick="closeMobileMenu()">Contacto</a>
+  </div>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-content">
+      <p class="hero-label">Chef Franko Salgado Presenta</p>
+      <h1 class="hero-title">Epicure Menu</h1>
+      <p class="hero-subtitle">
+        Una coleccion de creaciones culinarias que celebran la esencia de los ingredientes 
+        mas selectos, transformados en experiencias sensoriales unicas.
+      </p>
+    </div>
+    <div class="hero-scroll">
+      <span>Explorar Menu</span>
+      <div class="scroll-line"></div>
+    </div>
+  </section>
+
+  <!-- Entradas -->
+  <section class="menu-section" id="menu">
+    <div class="section-header reveal">
+      <p class="section-label">Primera Impresion</p>
+      <h2 class="section-title">Entradas</h2>
+      <p class="section-desc">
+        Cada entrada esta disenada para despertar los sentidos y preparar 
+        el paladar para la experiencia que esta por venir.
+      </p>
+    </div>
+    <div class="menu-grid">
+      <div class="menu-card reveal">
+        <div class="menu-card-image">
+          <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=600&q=80" alt="Tartar de Atun" loading="lazy">
+        </div>
+        <div class="menu-card-content">
+          <div class="menu-card-header">
+            <h3 class="menu-card-title">Tartar de Atun</h3>
+            <span class="menu-card-price">$380 MXN</span>
+          </div>
+          <p class="menu-card-desc">Atun aleta azul, aguacate cremoso, reduccion de soya y sesamo, hojuelas de oro comestible</p>
+          <div class="menu-card-tags">
+            <span class="menu-tag">Signature</span>
+            <span class="menu-tag">Sin Gluten</span>
+          </div>
+        </div>
+      </div>
+      <div class="menu-card reveal">
+        <div class="menu-card-image">
+          <img src="https://images.unsplash.com/photo-1551248429-40975aa4de74?w=600&q=80" alt="Ceviche Nikkei" loading="lazy">
+        </div>
+        <div class="menu-card-content">
+          <div class="menu-card-header">
+            <h3 class="menu-card-title">Ceviche Nikkei</h3>
+            <span class="menu-card-price">$340 MXN</span>
+          </div>
+          <p class="menu-card-desc">Robalo del Pacifico, leche de tigre con aji amarillo, camote glaseado, maiz cancha</p>
+          <div class="menu-card-tags">
+            <span class="menu-tag">Fusion</span>
+            <span class="menu-tag">Fresco</span>
+          </div>
+        </div>
+      </div>
+      <div class="menu-card reveal">
+        <div class="menu-card-image">
+          <img src="https://images.unsplash.com/photo-1544025162-d76694265947?w=600&q=80" alt="Carpaccio de Res" loading="lazy">
+        </div>
+        <div class="menu-card-content">
+          <div class="menu-card-header">
+            <h3 class="menu-card-title">Carpaccio de Res</h3>
+            <span class="menu-card-price">$320 MXN</span>
+          </div>
+          <p class="menu-card-desc">Filete prime laminado, rucula silvestre, parmesano reggiano 24 meses, aceite de trufa</p>
+          <div class="menu-card-tags">
+            <span class="menu-tag">Clasico</span>
+            <span class="menu-tag">Premium</span>
+          </div>
+        </div>
+      </div>
+      <div class="menu-card reveal">
+        <div class="menu-card-image">
+          <img src="https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?w=600&q=80" alt="Ensalada de Temporada" loading="lazy">
+        </div>
+        <div class="menu-card-content">
+          <div class="menu-card-header">
+            <h3 class="menu-card-title">Jardin de Estacion</h3>
+            <span class="menu-card-price">$280 MXN</span>
+          </div>
+          <p class="menu-card-desc">Hojas organicas de huerto local, vegetales rostizados, vinagreta de champan y hierbas</p>
+          <div class="menu-card-tags">
+            <span class="menu-tag">Vegano</span>
+            <span class="menu-tag">Organico</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Plato Destacado -->
+  <section class="featured-dish">
+    <div class="featured-container">
+      <div class="featured-content reveal">
+        <p class="featured-label">Plato Signature</p>
+        <h2 class="featured-title">Filete Wellington</h2>
+        <p class="featured-desc">
+          Nuestra interpretacion del clasico britanico. Filete de res Angus envuelto en 
+          duxelles de hongos silvestres y hojaldre artesanal, acompanado de puree de papa 
+          trufado y reduccion de vino tinto reserva.
+        </p>
+        <p class="featured-price">$680 MXN</p>
+        <a href="pages/formulario-cliente.html" class="btn-primary">Reservar Experiencia</a>
+      </div>
+      <div class="featured-image reveal">
+        <img src="https://images.unsplash.com/photo-1558030006-450675393462?w=800&q=80" alt="Filete Wellington" loading="lazy">
+      </div>
+    </div>
+  </section>
+
+  <!-- Platos Principales -->
+  <section class="menu-section">
+    <div class="section-header reveal">
+      <p class="section-label">El Corazon de la Experiencia</p>
+      <h2 class="section-title">Platos Principales</h2>
+      <p class="section-desc">
+        Creaciones que representan la maxima expresion de nuestra cocina, 
+        donde cada ingrediente cuenta una historia.
+      </p>
+    </div>
+    <div class="menu-grid">
+      <div class="menu-card reveal">
+        <div class="menu-card-image">
+          <img src="https://images.unsplash.com/photo-1432139555190-58524dae6a55?w=600&q=80" alt="Cordero Asado" loading="lazy">
+        </div>
+        <div class="menu-card-content">
+          <div class="menu-card-header">
+            <h3 class="menu-card-title">Costillar de Cordero</h3>
+            <span class="menu-card-price">$620 MXN</span>
+          </div>
+          <p class="menu-card-desc">Cordero de Sonora, costra de hierbas mediterraneas, puree de berenjenas ahumadas, jus de romero</p>
+          <div class="menu-card-tags">
+            <span class="menu-tag">Premium</span>
+          </div>
+        </div>
+      </div>
+      <div class="menu-card reveal">
+        <div class="menu-card-image">
+          <img src="https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=600&q=80" alt="Salmon" loading="lazy">
+        </div>
+        <div class="menu-card-content">
+          <div class="menu-card-header">
+            <h3 class="menu-card-title">Salmon Glaseado</h3>
+            <span class="menu-card-price">$520 MXN</span>
+          </div>
+          <p class="menu-card-desc">Salmon noruego, glaseado de miso y miel de agave, pak choi baby, arroz jazmín al vapor</p>
+          <div class="menu-card-tags">
+            <span class="menu-tag">Asiatico</span>
+            <span class="menu-tag">Omega 3</span>
+          </div>
+        </div>
+      </div>
+      <div class="menu-card reveal">
+        <div class="menu-card-image">
+          <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=600&q=80" alt="Pato Confitado" loading="lazy">
+        </div>
+        <div class="menu-card-content">
+          <div class="menu-card-header">
+            <h3 class="menu-card-title">Pato Confitado</h3>
+            <span class="menu-card-price">$580 MXN</span>
+          </div>
+          <p class="menu-card-desc">Pierna de pato confitada 12 horas, cerezas flambeadas, pure de castanas, reduccion de oporto</p>
+          <div class="menu-card-tags">
+            <span class="menu-tag">Frances</span>
+            <span class="menu-tag">Clasico</span>
+          </div>
+        </div>
+      </div>
+      <div class="menu-card reveal">
+        <div class="menu-card-image">
+          <img src="https://images.unsplash.com/photo-1559339352-11d035aa65de?w=600&q=80" alt="Risotto" loading="lazy">
+        </div>
+        <div class="menu-card-content">
+          <div class="menu-card-header">
+            <h3 class="menu-card-title">Risotto de Hongos</h3>
+            <span class="menu-card-price">$420 MXN</span>
+          </div>
+          <p class="menu-card-desc">Arroz carnaroli, hongos porcini y shiitake, parmesano 36 meses, aceite de trufa negra</p>
+          <div class="menu-card-tags">
+            <span class="menu-tag">Vegetariano</span>
+            <span class="menu-tag">Italiano</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Postres -->
+  <section class="menu-section">
+    <div class="section-header reveal">
+      <p class="section-label">El Dulce Final</p>
+      <h2 class="section-title">Postres</h2>
+      <p class="section-desc">
+        El broche de oro para una experiencia inolvidable.
+      </p>
+    </div>
+    <div class="menu-list">
+      <div class="menu-list-item reveal">
+        <div class="menu-list-info">
+          <h3>Esfera de Chocolate Valrhona</h3>
+          <p>Chocolate 70% cacao, corazon de frutos rojos, helado de vainilla de Madagascar</p>
+        </div>
+        <span class="menu-list-price">$280 MXN</span>
+      </div>
+      <div class="menu-list-item reveal">
+        <div class="menu-list-info">
+          <h3>Tarta de Limon Yuzu</h3>
+          <p>Base de almendra, crema de yuzu, merengue italiano flambeado</p>
+        </div>
+        <span class="menu-list-price">$240 MXN</span>
+      </div>
+      <div class="menu-list-item reveal">
+        <div class="menu-list-info">
+          <h3>Panna Cotta de Lavanda</h3>
+          <p>Crema de lavanda provenzal, compota de fresas, crumble de pistache</p>
+        </div>
+        <span class="menu-list-price">$220 MXN</span>
+      </div>
+      <div class="menu-list-item reveal">
+        <div class="menu-list-info">
+          <h3>Cheesecake de Maracuya</h3>
+          <p>New York style, coulis de maracuya, mango caramelizado</p>
+        </div>
+        <span class="menu-list-price">$250 MXN</span>
+      </div>
+      <div class="menu-list-item reveal">
+        <div class="menu-list-info">
+          <h3>Tabla de Quesos Artesanales</h3>
+          <p>Seleccion de quesos mexicanos premium, membrillo, nueces caramelizadas</p>
+        </div>
+        <span class="menu-list-price">$380 MXN</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-section">
+    <div class="cta-content reveal">
+      <p class="section-label">Reserva Tu Mesa</p>
+      <h2 class="cta-title">Vive la Experiencia Epicure</h2>
+      <p class="cta-text">
+        Cada cena es una oportunidad para crear momentos extraordinarios. 
+        Permitenos disenar una experiencia gastronomica que supere tus expectativas.
+      </p>
+      <div class="cta-buttons">
+        <a href="https://wa.me/5232216068743?text=Hola%20Chef%20Franko%20quiero%20reservar%20una%20experiencia%20Epicure" class="btn-primary" target="_blank">WhatsApp Directo</a>
+        <a href="pages/formulario-cliente.html" class="btn-secondary">Formulario de Reserva</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-content">
+      <a href="index.html" class="footer-logo">CHEF4YOU</a>
+      <div class="footer-links">
+        <a href="index.html">Inicio</a>
+        <a href="index.html#about">Sobre Mi</a>
+        <a href="#menu">Menu</a>
+        <a href="pages/formulario-cliente.html">Reservar</a>
+        <a href="pages/galeria.html">Galeria</a>
+      </div>
+      <div class="footer-social">
+        <a href="https://instagram.com/frankosagrado" target="_blank" class="social-link" aria-label="Instagram">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+          </svg>
+        </a>
+        <a href="https://wa.me/5232216068743" target="_blank" class="social-link" aria-label="WhatsApp">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981z"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 Chef4You - Chef Franko Salgado. Todos los derechos reservados.</p>
+    </div>
+  </footer>
+
+  <!-- WhatsApp Flotante -->
+  <a href="https://wa.me/5232216068743?text=Hola%20Chef%20Franko%20quiero%20reservar%20una%20experiencia" class="whatsapp-float" target="_blank" aria-label="Contactar por WhatsApp">
+    <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor">
+      <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/>
+    </svg>
+  </a>
+
+  <!-- Google Translate Hidden Element -->
+  <div id="google_translate_element" style="display: none;"></div>
+
+  <!-- Scripts -->
+  <script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+  
+  <script>
+    // Google Translate Init
+    function googleTranslateElementInit() {
+      new google.translate.TranslateElement({
+        pageLanguage: 'es',
+        includedLanguages: 'en,fr,de,it,pt,ja,zh-CN',
+        layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+        autoDisplay: false
+      }, 'google_translate_element');
+    }
+
+    // Custom Language Selector
+    const langBtn = document.getElementById('langBtn');
+    const langDropdown = document.getElementById('langDropdown');
+    const currentLang = document.getElementById('currentLang');
+
+    langBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      langDropdown.classList.toggle('show');
+    });
+
+    document.addEventListener('click', () => {
+      langDropdown.classList.remove('show');
+    });
+
+    document.querySelectorAll('.lang-option').forEach(option => {
+      option.addEventListener('click', function() {
+        const lang = this.dataset.lang;
+        currentLang.textContent = lang.toUpperCase();
+        langDropdown.classList.remove('show');
+        
+        // Trigger Google Translate
+        const select = document.querySelector('.goog-te-combo');
+        if (select) {
+          select.value = lang;
+          select.dispatchEvent(new Event('change'));
+        } else {
+          // Fallback: set cookie and reload
+          document.cookie = `googtrans=/es/${lang}; path=/`;
+          document.cookie = `googtrans=/es/${lang}; path=/; domain=${location.hostname}`;
+          location.reload();
+        }
+      });
+    });
+
+    // Mobile menu
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobileMenu');
+
+    hamburger.addEventListener('click', () => {
+      mobileMenu.classList.toggle('active');
+    });
+
+    function closeMobileMenu() {
+      mobileMenu.classList.remove('active');
+    }
+
+    // Reveal on scroll
+    function reveal() {
+      const reveals = document.querySelectorAll('.reveal');
+      reveals.forEach(element => {
+        const windowHeight = window.innerHeight;
+        const elementTop = element.getBoundingClientRect().top;
+        const elementVisible = 150;
+        if (elementTop < windowHeight - elementVisible) {
+          element.classList.add('active');
+        }
+      });
+    }
+
+    window.addEventListener('scroll', reveal);
+    reveal();
+
+    // Smooth scroll for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
+        }
+      });
+    });
+  </script>
+
+</body>
+</html>
