@@ -6,12 +6,15 @@
 
 class LanguageSelector {
   constructor(options = {}) {
-    this.currentLang = localStorage.getItem('preferredLanguage') || 'es';
     this.languages = {
       es: { name: 'Español', flag: '🇲🇽', code: 'es' },
       en: { name: 'English', flag: '🇬🇧', code: 'en' },
       fr: { name: 'Français', flag: '🇫🇷', code: 'fr' }
     };
+    this.defaultLang = 'es';
+    this.currentLang = this.getSupportedLanguage(
+      localStorage.getItem('preferredLanguage')
+    );
     this.init();
   }
 
@@ -69,20 +72,26 @@ class LanguageSelector {
   }
 
   switchLanguage(langCode) {
-    if (langCode === this.currentLang) return;
+    const normalizedLangCode = this.getSupportedLanguage(langCode);
+    if (normalizedLangCode === this.currentLang) return;
 
     // Actualizar estado visual
     document.querySelectorAll('.lang-flag').forEach(btn => {
       btn.classList.remove('active');
     });
-    document.querySelector(`[data-lang="${langCode}"]`).classList.add('active');
+    const selectedButton = document.querySelector(
+      `[data-lang="${normalizedLangCode}"]`
+    );
+    if (selectedButton) {
+      selectedButton.classList.add('active');
+    }
 
     // Guardar preferencia
-    localStorage.setItem('preferredLanguage', langCode);
-    this.currentLang = langCode;
+    localStorage.setItem('preferredLanguage', normalizedLangCode);
+    this.currentLang = normalizedLangCode;
 
     // Aplicar traducción
-    this.applyLanguage(langCode);
+    this.applyLanguage(normalizedLangCode);
   }
 
   applyLanguage(langCode) {
@@ -120,6 +129,10 @@ class LanguageSelector {
       fr: 'fr'
     };
     return map[langCode] || 'es';
+  }
+
+  getSupportedLanguage(langCode) {
+    return this.languages[langCode] ? langCode : this.defaultLang;
   }
 
   loadTranslations(langCode) {
